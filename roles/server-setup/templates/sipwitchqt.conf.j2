@@ -1,0 +1,20 @@
+; initial banner, may be changed
+banner = Welcome to {{ ansible_hostname }}
+
+; operator room mode
+operators = public
+database = mysql
+realm = {{ ansible_nodename }}
+localnames = {{ ansible_fqdn }} {{ ansible_hostname }}.local
+
+[database]
+name = piwitch
+username = root
+
+[bootstrap]
+; This is used to initially bootstrap the database only.  After login
+; you should change the bootstrap password.
+extension = {{ db_initial_extension }}
+authorize = {{ db_initial_authorize }}
+identity = {{ db_initial_identity }}
+password = {{ db_initial_password }}

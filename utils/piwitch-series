@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+# Copyright (C) 2017-2018 Tycho Softworks
+#
+# This file is free software; as a special exception the author gives
+# unlimited permission to copy and/or distribute it, with or without
+# modifications, as long as this notice is preserved
+
+['pp', 'mysql2'].each {|mod| require mod}
+
+begin
+  dbcfg = {:database => 'piwitch', :username => 'root', :password => nil}
+  client = Mysql2::Client.new(dbcfg)
+  results = client.query("SELECT dbseries FROM Config")
+  if results.first
+    pp results.first['dbseries']
+  else
+    pp 999
+  end
+rescue Mysql2::Error
+  pp 998
+end

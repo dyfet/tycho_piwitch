@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby
+# Copyright (C) 2017-2018 Tycho Softworks
+#
+# This file is free software; as a special exception the author gives
+# unlimited permission to copy and/or distribute it, with or without
+# modifications, as long as this notice is preserved
+
+['pp', 'digest', 'fileutils', 'mysql2'].each {|mod| require mod}
+
+def get_secret(type, user, domain, pass)
+  case type
+  when 'SHA-256'
+    Digest::SHA256.hexdigest "#{user}:#{domain}:#{pass}"
+  when 'SHA-512'
+    Digest::SHA512.hexdigest "#{user}:#{domain}:#{pass}"
+  else
+    Digest::MD5.hexdigest "#{user}:#{domain}:#{pass}"
+  end
+end
+
+bootstrap = {}
+config = '/etc/sipwitchqt.conf'
+
+abort("*** piwitch-bootstrap: no config") unless File.exists?(config)
+File.open(config, 'r') do |infile; line, key, value|
+  while(line = infile.gets)
+    line.gsub!(/(^|\s)[#].*$/, '')
+    case line.strip!
+    when /^\[.*\]$/
+      section = line[1..-2].downcase
+    when /[=]/
+      key, value = line.split(/\=/).each {|s| s.strip!}
+      key.downcase!
+      case section
+      when nil
+        case key
+        when 'realm'
+          bootstrap[:realm] = value
+        end
+      when 'bootstrap'
+        bootstrap[key.to_sym] = value
+      end
+    end
+  end
+end
+
+dbcfg = {:database => 'piwitch', :username => 'root', :password => nil}
+client = Mysql2::Client.new(dbcfg)
+results = client.query("SELECT dbseries FROM Config")
+abort("*** piwitch-bootstrap: already configured") if results.first
+
+extnbr = bootstrap[:extension]
+user = bootstrap[:authorize]
+realm = bootstrap[:realm]
+display = bootstrap[:identity]
+digest_type = 'MD5'
+extpass = get_secret(digest_type, user, realm, bootstrap[:password])
+
+IPL_COMMANDS = [
+  "INSERT INTO Config(realm) VALUES('#{realm}');",
+  "INSERT INTO Authorize(authname,authtype,authaccess) VALUES('system', 'SYSTEM', 'LOCAL');",
+  "INSERT INTO Authorize(authname,authtype,authaccess) VALUES('nobody', 'SYSTEM', 'LOCAL');",
+  "INSERT INTO Authorize(authname,authtype,authaccess) VALUES('anonymous', 'SYSTEM', 'DISABLED');",
+  "INSERT INTO Authorize(authname,authtype,authaccess) VALUES('operators', 'SYSTEM', 'PILOT');",
+  "INSERT INTO Extensions(extnbr,authname,display) VALUES(0, 'operators', 'Operators');",
+  "INSERT INTO Authorize(authname,authdigest,realm,secret,fullname,authtype,authaccess) VALUES('#{user}','#{digest_type}','#{realm}','#{extpass}','#{display}','USER','REMOTE');",
+  "INSERT INTO Extensions(extnbr,authname) VALUES(#{extnbr},'#{user}');",
+  "INSERT INTO Endpoints(extnbr) VALUES(#{extnbr});",
+  "INSERT INTO Admin(authname,extnbr) VALUES('system',#{extnbr});",
+]
+
+IPL_COMMANDS.each do |sql|
+  client.query(sql)
+end
+

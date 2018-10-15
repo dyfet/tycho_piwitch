@@ -1,0 +1,11 @@
+---
+- name: Remove database piwitch
+  mysql_db:
+    name: piwitch
+    state: absent
+
+- name: Remove db user www-data
+  mysql_user:
+    name: www-data
+    state: absent
+

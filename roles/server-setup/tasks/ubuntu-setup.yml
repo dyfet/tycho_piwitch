@@ -1,0 +1,8 @@
+---
+
+- name: Install ubuntu ppa tychosoft
+  apt_repository:
+    repo: ppa:tychosoft/ppa
+
+
+

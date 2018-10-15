@@ -1,0 +1,22 @@
+---
+
+- include: debian-setup.yml
+  when: ansible_distribution == "Debian"
+
+- include: ubuntu-setup.yml
+  when: ansible_distribution == "Ubuntu"
+
+- name: Update repo cache
+  apt:
+    update_cache: yes
+
+- name: Install server packages
+  apt:
+    name: "{{ server_packages }}"
+
+- name: Config sipwitchqt server
+  template:
+    src: sipwitchqt.conf.j2
+    dest: /etc/sipwitchqt.conf
+    mode: 0600
+

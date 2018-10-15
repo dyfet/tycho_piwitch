@@ -1,0 +1,34 @@
+#!/usr/bin/env ansible-playbook
+---
+
+# This is used to create a new install.
+# Runs ansible_playbook -i inventory/hosts.ini install.yml
+
+- hosts: server
+  become: yes
+  vars:
+    debian_version: stretch
+    server_packages:
+    - mariadb-server
+    - mariadb-client
+    - lighttpd
+    - ruby-mysql2
+    - python-mysqldb    # required for ansible mysql support
+    - python3-mysqldb   # maybe if ansible installed for  python3
+    - sipwitchqt-server
+    - sipwitchqt-utils
+  pre_tasks:
+    - name: Test if debian system
+      command: test -f /etc/debian_version
+  post_tasks:
+    - name: Restart sipwitchqt server
+      systemd: name=sipwitchd state=restarted daemon_reload=yes
+    - name: Restart lighttpd server
+      systemd: name=lighttpd state=restarted daemon_reload=yes
+  roles:
+    - server-setup
+    - setup-utils       # needed for piwitch-bootstrap...
+#   - setup-restapi     # flask rest api app
+#   - setup-updater     # flask software updater app
+    - remove-db         # cleanup db before attempting install
+    - install-db        # create db users, load from our schema

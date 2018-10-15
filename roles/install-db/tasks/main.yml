@@ -1,0 +1,26 @@
+---
+- name: Create database piwitch
+  mysql_db:
+    name: piwitch
+    state: present
+
+- name: Copy database schemas
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/share/schemas/"
+    owner: "root"
+    mode: 0644
+  with_fileglob:
+    - schemas/piwitch-*.sql
+
+- name: Install database schemas
+  mysql_db:
+    name: piwitch
+    state: import
+    target: "/usr/share/schemas/{{ item | basename }}"
+  with_fileglob:
+    - schemas/piwitch-*.sql
+
+- name: Bootstrap initial database
+  command: piwitch-bootstrap
+

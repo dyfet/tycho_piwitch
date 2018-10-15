@@ -1,0 +1,5 @@
+inventory/*.ini
+!inventory/example.ini
+group_vars/*.yml
+!group_vars/all.yml
+*.retry

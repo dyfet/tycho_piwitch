@@ -1,0 +1,35 @@
+#!/usr/bin/env ansible-playbook
+---
+
+# This is used to update an existing install.
+# Runs ansible_playbook -i inventory/hosts.ini update.yml
+
+- hosts: server
+  become: yes
+  vars:
+    update_packages:
+    - sipwitchqt-utils
+    - sipwitchqt-server
+  pre_tasks:
+    - name: Test if installed
+      command: test -f /etc/sipwitchqt.conf
+    - name: Stop lighttpd server
+      systemd: name=lighttpd state=stopped
+    - name: Stop sipwitchqt server
+      systemd: name=sipwitchd state=stopped
+  post_tasks:
+    - name: Update server packages
+      apt:
+        name: "{{ update_packages }}"
+        state: latest
+    - name: Start sipwitchqt server
+      systemd: name=sipwitchd state=started
+    - name: Start lighttpd server
+      systemd: name=lighttpd state=started
+  roles:
+    - setup-utils       # refresh with most current utils...
+#   - setup-restapi     # flask rest api app
+#   - setup-updater     # flask software updater app
+    - update-db         # migrate to most current db schema
+    - update-config     # any config file updates needed
+
