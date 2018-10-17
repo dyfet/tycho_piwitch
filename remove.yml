@@ -2,7 +2,7 @@
 ---
 
 # This is used to remove and cleanup most of piwitch.
-# Runs ansible_playbook -i inventory/hosts.ini remove.yml
+# Runs ansible-playbook -i inventory/hosts.ini remove.yml
 
 - hosts: server
   become: yes

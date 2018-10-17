@@ -2,7 +2,7 @@
 ---
 
 # This is used to create a new install.
-# Runs ansible_playbook -i inventory/hosts.ini install.yml
+# Runs ansible-playbook -i inventory/hosts.ini install.yml
 
 - hosts: server
   become: yes

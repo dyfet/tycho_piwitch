@@ -2,4 +2,10 @@ inventory/*.ini
 !inventory/example.ini
 group_vars/*.yml
 !group_vars/all.yml
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 *.retry
+*.tar.gz

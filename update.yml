@@ -2,7 +2,7 @@
 ---
 
 # This is used to update an existing install.
-# Runs ansible_playbook -i inventory/hosts.ini update.yml
+# Runs ansible-playbook -i inventory/hosts.ini update.yml
 
 - hosts: server
   become: yes
