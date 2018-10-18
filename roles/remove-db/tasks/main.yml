@@ -9,3 +9,8 @@
     name: www-data
     state: absent
 
+- name: Remove db user sipwitch
+  mysql_user:
+    name: sipwitch
+    state: absent
+
