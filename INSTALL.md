@@ -32,8 +32,9 @@ Otherwise I suggest limiting ssh account access to the managed device.  The
 assumption is if someone can already get on the box, and become root, there
 really is little added value in further locking down mariadb locally anyway.
 
-Once your inventory/hosts.ini file is set, simply run ./install.yml to run
-the installation playbook.  Alternately you can run the installer directly
-from your server running the playbook sudo for local.
-
+Once your inventory/hosts.ini file is set, simply run ./install.yml to run the
+installation playbook.  You can pull updated piwitch releases from git and use
+./install.yml to update your installation as well.  Alternately you can copy
+piwitch to your server and run the installer directly running the install
+playbook with sudo for local.
 

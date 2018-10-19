@@ -1,7 +1,7 @@
 #!/usr/bin/env ansible-playbook
 ---
 
-# This is used to create a new install.
+# This is used to create a new install or update an existing one
 # Runs ansible-playbook -i inventory/hosts.ini install.yml
 
 - hosts: server
@@ -30,5 +30,5 @@
     - setup-utils       # needed for piwitch-bootstrap...
 #   - setup-restapi     # flask rest api app
 #   - setup-updater     # flask software updater app
-    - remove-db         # cleanup db before attempting install
+#    - remove-db         # cleanup db before attempting install
     - install-db        # create db users, load from our schema

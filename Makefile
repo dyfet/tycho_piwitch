@@ -17,7 +17,7 @@ install:
 	ansible-playbook -i $(INVENTORY) install.yml
 
 update:
-	ansible-playbook -i $(INVENTORY) update.yml
+	ansible-playbook -i $(INVENTORY) install.yml
 
 remove:
 	ansible-playbook -i $(INVENTORY) remove.yml

@@ -47,7 +47,8 @@ end
 dbcfg = {:database => 'piwitch', :username => 'root', :password => nil}
 client = Mysql2::Client.new(dbcfg)
 results = client.query("SELECT dbseries FROM Config")
-abort("*** piwitch-bootstrap: already configured") if results.first
+print "already configured" if results.first
+exit 0 if results.first
 
 extnbr = bootstrap[:extension]
 user = bootstrap[:authorize]
