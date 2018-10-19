@@ -28,7 +28,5 @@
   roles:
     - server-setup
     - setup-utils       # needed for piwitch-bootstrap...
-#   - setup-restapi     # flask rest api app
-#   - setup-updater     # flask software updater app
-#    - remove-db         # cleanup db before attempting install
+#   - setup-flask       # setup flask services
     - install-db        # create db users, load from our schema
