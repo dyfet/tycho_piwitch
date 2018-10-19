@@ -13,6 +13,7 @@
 - name: Install server packages
   apt:
     name: "{{ server_packages }}"
+    state: latest
 
 - name: Config sipwitchqt server
   template:
