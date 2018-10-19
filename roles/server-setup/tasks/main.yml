@@ -20,6 +20,6 @@
     src: sipwitchqt.conf.j2
     dest: /etc/sipwitchqt.conf
     mode: 0660
-    owner: "{{ sipw_user_identity }}"
-    group: "{{ sipw_user_identity }}"
+    owner: "{{ sip_server_identity }}"
+    group: "{{ sip_server_identity }}"
 
