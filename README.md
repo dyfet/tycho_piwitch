@@ -22,4 +22,3 @@ of sip integrated applications (for example a sip speaker, or hvac control) for
 deployment on stand-alone Pi devices may also be delivered similarly with
 ansible in related packages in the future.
 
-

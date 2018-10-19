@@ -1,0 +1,7 @@
+v0.0.1
+* Can maintain dedicated sipwitchqt server on debian & ubuntu
+* Can configure mariadb server and associated user access
+* Can maintain piwitch database schema
+* Can establish pattern for lighttpd for future flask apps
+* Will require sipwitchqt 0.3.3 or later at first release
+

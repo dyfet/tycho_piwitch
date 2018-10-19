@@ -5,7 +5,9 @@ banner = Welcome to {{ ansible_hostname }}
 operators = public
 database = mysql
 realm = {{ ansible_nodename }}
-localnames = {{ ansible_fqdn }} {{ ansible_hostname }}.local
+
+; local name auto detection to be fixed in sipwitch 0.3.3
+; localnames = {{ ansible_fqdn }} {{ ansible_hostname }}.local
 
 [database]
 name = piwitch
