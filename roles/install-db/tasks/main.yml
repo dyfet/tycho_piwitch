@@ -18,27 +18,8 @@
     name: piwitch
     state: import
     target: "/usr/share/schemas/{{ item | basename }}"
-  with_fileglob:
-    - schemas/piwitch-*.sql
+  with_items: "{{lookup('fileglob','schemas/piwitch-*.sql').split(',')|sort}}"
 
 - name: Bootstrap initial database
   command: piwitch-bootstrap
-
-# This is used to apply schema fragments to upgrade older databases
-
-- name: Get remote db series number
-  command: piwitch-series
-  register: db_series
-
-- set_fact:
-    db_version: "{{ db_series.stdout }}"
-
-- name: Update by series
-  include: series.yml
-  with_items:
-    - 8
-    - 9
-    - 10
-    - 11
-  when: item|int > db_version|int
 

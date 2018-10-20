@@ -1,9 +1,0 @@
----
-
-- name: Updating series from {{ db_version }}
-  debug: msg="Applying {{ item }}"
-
-- name: Updated series to {{ item }}
-  set_fact:
-    db_version: "{{ item }}"
-
