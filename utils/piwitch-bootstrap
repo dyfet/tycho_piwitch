@@ -58,7 +58,7 @@ digest_type = 'MD5'
 extpass = get_secret(digest_type, user, realm, bootstrap[:password])
 
 IPL_COMMANDS = [
-  "INSERT INTO Config(realm) VALUES('#{realm}');",
+  "INSERT INTO Config(id, realm) VALUES(0,'#{realm}');",
   "INSERT INTO Authorize(authname,authtype,authaccess) VALUES('system', 'SYSTEM', 'LOCAL');",
   "INSERT INTO Authorize(authname,authtype,authaccess) VALUES('nobody', 'SYSTEM', 'LOCAL');",
   "INSERT INTO Authorize(authname,authtype,authaccess) VALUES('anonymous', 'SYSTEM', 'DISABLED');",
