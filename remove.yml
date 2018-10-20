@@ -10,9 +10,18 @@
     remove_packages:
       - sipwitchqt-server
       - sipwitchqt-utils
+    stopped_services:
+      - lighttpd
+      - sipwitchd
+    restart_services:
+      - lighttpd
   pre_tasks:
-    - name: Test if debian system
-      command: test -f /etc/debian_version
+    - name: Test if piwitch installed
+      command: test -f /usr/sbin/piwitch-series
+    - name: Stop services
+      systemd: name="{{item}}" state=stopped 
+      with_items:
+      - "{{stopped_services}}"
   roles:
     - remove-db
     - server-cleanup

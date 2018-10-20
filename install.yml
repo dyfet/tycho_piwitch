@@ -17,14 +17,17 @@
     - python3-mysqldb   # maybe if ansible installed for  python3
     - sipwitchqt-server
     - sipwitchqt-utils
+    system_services:
+    - sipwitchd
+    - lighttpd
   pre_tasks:
     - name: Test if debian system
       command: test -f /etc/debian_version
   post_tasks:
-    - name: Restart sipwitchqt server
-      systemd: name=sipwitchd state=restarted daemon_reload=yes
-    - name: Restart lighttpd server
-      systemd: name=lighttpd state=restarted daemon_reload=yes
+    - name: Restart services
+      systemd: name="{{item}}" state=restarted 
+      with_items:
+      - "{{system_services}}"
   roles:
     - server-setup
     - setup-utils       # needed for piwitch-bootstrap...

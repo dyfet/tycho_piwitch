@@ -15,6 +15,13 @@
     name: "{{ server_packages }}"
     state: latest
 
+# definately want services stopped/inactive before any updates processed
+
+- name: Stop services
+  systemd: name="{{item}}" state=stopped 
+  with_items:
+    - "{{system_services}}"
+
 - name: Config sipwitchqt server
   template:
     src: sipwitchqt.conf.j2

@@ -7,5 +7,9 @@ group_vars/*.yml
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.idea/*
+!.idea/inspectionProfiles
+!.idea/inspectionProfiles/*
+venv/
 *.retry
 *.tar.gz

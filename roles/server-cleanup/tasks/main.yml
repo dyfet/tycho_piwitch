@@ -1,18 +1,18 @@
 ---
-
 - name: Remove server packages
   apt:
     name: "{{ remove_packages }}"
     state: absent
     autoremove: yes
 
-- name: Remove server configs
+- name: Remove config files and web services
   file: 
     path: "{{ item }}"
     state: absent
   with_items:
     - /etc/sipwitchqt.conf
     - /var/lib/sipwitchqt
+    - "{{ web_install_prefix }}"
 
 - name: Remove server utils
   file:
@@ -20,4 +20,9 @@
     state: absent
   with_fileglob:
     - utils/*
+
+- name: Restart services
+  systemd: name="{{item}}" state=restarted 
+  with_items:
+  - "{{restart_services}}"
 
