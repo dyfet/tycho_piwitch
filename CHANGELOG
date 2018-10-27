@@ -5,3 +5,5 @@ v0.0.1
 * Can establish pattern for lighttpd for future flask apps
 * Will require sipwitchqt 0.3.3 or later at first release
 
+v0.0.2
+* Improved updating packaging states

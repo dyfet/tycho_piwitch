@@ -8,6 +8,9 @@
   become: yes
   vars:
     debian_version: stretch
+    update_packages:
+    - sipwitchqt-server
+    - sipwitchqt-utils
     server_packages:
     - mariadb-server
     - mariadb-client
@@ -24,6 +27,10 @@
     - name: Test if debian system
       command: test -f /etc/debian_version
   post_tasks:
+    - name: Update server packages
+      apt:
+        name: "{{ update_packages }}"
+        state: latest
     - name: Restart services
       systemd: name="{{item}}" state=restarted 
       with_items:

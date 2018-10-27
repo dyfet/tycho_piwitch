@@ -13,7 +13,7 @@
 - name: Install server packages
   apt:
     name: "{{ server_packages }}"
-    state: latest
+    state: present
 
 # definately want services stopped/inactive before any updates processed
 
