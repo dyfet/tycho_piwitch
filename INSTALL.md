@@ -44,7 +44,8 @@ Using Make
 Alternately you can use the Makefile to manage your piwitch installation.  The
 Makefile holds base project information.  It is also useful in that the dummy
 (all) target verifies your config.  Make allows easy use of alternate inventory
-files, for example, using ```make INVENTORY=inventory/local.ini install```.
+files, for example, using ```make INVENTORY=local install``` to refer to
+inventory/local.ini rather than inventory/hosts.ini.
 
 The makefile is a project control file.  It keeps the project name and release
 version.  It also can create distribution tarballs (```make dist```) which can
