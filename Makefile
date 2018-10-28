@@ -1,6 +1,10 @@
+#!/usr/bin/make -f
+
 PROJECT = piwitch
 VERSION = 0.0.2
 INVENTORY = inventory/hosts.ini
+
+.PHONY: all version dist install update remove
 
 all:
 	@if test ! -f $(INVENTORY) ; then echo "copy inventory/example.ini to $(INVENTORY) and modify as needed" ; fi

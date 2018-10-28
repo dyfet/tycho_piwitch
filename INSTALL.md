@@ -38,3 +38,17 @@ installation playbook.  You can pull updated piwitch releases from git and use
 piwitch to your server and run the installer directly running the install
 playbook with sudo for local.
 
+Using Make
+==========
+
+Alternately you can use the Makefile to manage your piwitch installation.  The
+Makefile holds base project information.  It is also useful in that the dummy
+(all) target verifies your config.  Make allows easy use of alternate inventory
+files, for example, using ```make INVENTORY=inventory/local.ini install```.
+
+The makefile is a project control file.  It keeps the project name and release
+version.  It also can create distribution tarballs (```make dist```) which can
+then be copied to another machine, so you could use ansible locally on a target
+machine directly, for example.  Additional configuration overrides, unit tests,
+and other related services may also be added to the Makefile in the future.
+
