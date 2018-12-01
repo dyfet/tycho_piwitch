@@ -1,3 +1,9 @@
+v0.0.3
+* Can select either apache2 or lighttpd for web server
+
+v0.0.2
+* Improved updating packaging states
+
 v0.0.1
 * Can maintain dedicated sipwitchqt server on debian & ubuntu
 * Can configure mariadb server and associated user access
@@ -5,8 +11,3 @@ v0.0.1
 * Can establish pattern for lighttpd for future flask apps
 * Will require sipwitchqt 0.3.3 or later at first release
 
-v0.0.2
-* Improved updating packaging states
-
-v0.0.3
-* Can select either apache2 or lighttpd for web server
