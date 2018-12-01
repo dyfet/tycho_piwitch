@@ -14,7 +14,7 @@
     server_packages:
     - mariadb-server
     - mariadb-client
-    - lighttpd
+    - "{{ web_server }}"
     - ruby-mysql2
     - python-mysqldb    # required for ansible mysql support
     - python3-mysqldb   # maybe if ansible installed for  python3
@@ -22,7 +22,7 @@
     - sipwitchqt-utils
     system_services:
     - sipwitchd
-    - lighttpd
+    - "{{ web_server }}"
   pre_tasks:
     - name: Test if debian system
       command: test -f /etc/debian_version

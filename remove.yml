@@ -11,10 +11,10 @@
       - sipwitchqt-server
       - sipwitchqt-utils
     stopped_services:
-      - lighttpd
+      - "{{ web_server }}"
       - sipwitchd
     restart_services:
-      - lighttpd
+      - "{{ web_server }}"
   pre_tasks:
     - name: Test if piwitch installed
       command: test -f /usr/sbin/piwitch-series

@@ -3,12 +3,12 @@ Getting Started
 
 I use ansible to install PiWitch onto a dedicated remote server.  This is used
 to configure and install SipWitchQt, a dedicated MariaDB server, and lighttpd
-to support our python based flask web applets.  While I call this package
-PiWitch, in fact it can be used to create and update any stand-alone dedicated
-SipWitchQt server runnning either Debian or Ubuntu, on X86, and AMD64, as well
-as Arm.  A minimal system/headless ssh accessible server install of Debian
-Stretch or Ubuntu 18.04, or, in the case of the Raspberry Pi, a "Raspbian
-lite" base install, is all that is required to start from.
+(or apache2) to support our python based flask web applets.  While I call this
+package PiWitch, in fact it can be used to create and update any stand-alone
+dedicated SipWitchQt server runnning either Debian or Ubuntu, on X86, and
+AMD64, as well as Arm.  A minimal system/headless ssh accessible server install
+of Debian Stretch or Ubuntu 18.04, or, in the case of the Raspberry Pi, a
+"Raspbian lite" base install, is all that is required to start from.
 
 On raspbian we have well known account 'pi', which typically can sudo to root.
 If using Debian or Ubuntu you will need to create or have a ssh user that can

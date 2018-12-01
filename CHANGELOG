@@ -7,3 +7,6 @@ v0.0.1
 
 v0.0.2
 * Improved updating packaging states
+
+v0.0.3
+* Can select either apache2 or lighttpd for web server
