@@ -1,6 +1,7 @@
 CHANGELOG
 INSTALL.md
 LICENSE
+Makefile
 README.md
 TODO
 ansible.cfg
