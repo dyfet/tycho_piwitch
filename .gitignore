@@ -11,5 +11,6 @@ group_vars/*.yml
 !.idea/inspectionProfiles
 !.idea/inspectionProfiles/*
 venv/
+*.creator.user
 *.retry
 *.tar.gz
