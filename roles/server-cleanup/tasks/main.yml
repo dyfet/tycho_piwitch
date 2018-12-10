@@ -5,14 +5,15 @@
     state: absent
     autoremove: yes
 
-- name: Remove config files and web services
+- name: Remove config files and piwitch services
   file: 
     path: "{{ item }}"
     state: absent
   with_items:
+    - /lib/systemd/piwitch.service
     - /etc/sipwitchqt.conf
     - /var/lib/sipwitchqt
-    - "{{ web_install_prefix }}"
+    - /srv/piwitch
 
 - name: Remove server utils
   file:

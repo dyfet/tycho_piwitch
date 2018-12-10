@@ -14,15 +14,16 @@
     server_packages:
     - mariadb-server
     - mariadb-client
-    - "{{ web_server }}"
     - ruby-mysql2
+    - ruby-rack
+    - ruby-sinatra
+    - ruby-sinatra-contrib
+    - ruby-json
     - python-mysqldb    # required for ansible mysql support
-    - python3-mysqldb   # maybe if ansible installed for  python3
     - sipwitchqt-server
     - sipwitchqt-utils
     system_services:
     - sipwitchd
-    - "{{ web_server }}"
   pre_tasks:
     - name: Test if debian system
       command: test -f /etc/debian_version

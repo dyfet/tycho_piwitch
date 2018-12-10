@@ -11,10 +11,7 @@
       - sipwitchqt-server
       - sipwitchqt-utils
     stopped_services:
-      - "{{ web_server }}"
       - sipwitchd
-    restart_services:
-      - "{{ web_server }}"
   pre_tasks:
     - name: Test if piwitch installed
       command: test -f /usr/sbin/piwitch-series
