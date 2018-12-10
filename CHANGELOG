@@ -1,3 +1,6 @@
+v0.0.4
+* Remove web server config entirely, use sinatra and rack on ruby
+
 v0.0.3
 * Can select either apache2 or lighttpd for web server
 
