@@ -14,6 +14,7 @@
     server_packages:
     - mariadb-server
     - mariadb-client
+    - ruby-posix-mq
     - ruby-mysql2
     - ruby-rack
     - ruby-sinatra
@@ -39,5 +40,5 @@
   roles:
     - server-setup
     - setup-utils       # needed for piwitch-bootstrap...
-#   - setup-flask       # setup flask services
+    - setup-webkit      # web support
     - install-db        # create db users, load from our schema
