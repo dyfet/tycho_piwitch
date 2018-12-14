@@ -15,12 +15,6 @@
     name: "{{ server_packages }}"
     state: present
 
-- name: Add www-data to sipwitch group
-  user:
-    name: www-data
-    groups: sipwitch
-    append: yes
-
 # definately want services stopped/inactive before any updates processed
 
 - name: Stop services
