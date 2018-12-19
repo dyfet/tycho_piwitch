@@ -11,12 +11,13 @@
       - sipwitchqt-server
       - sipwitchqt-utils
     stopped_services:
-      - sipwitchd
+      - piwitch
+      - sipwitchqt-server
   pre_tasks:
     - name: Test if piwitch installed
       command: test -f /usr/sbin/piwitch-series
     - name: Stop services
-      systemd: name="{{item}}" state=stopped 
+      systemd: name="{{item}}" state=stopped enabled=no
       with_items:
       - "{{stopped_services}}"
   roles:

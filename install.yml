@@ -15,6 +15,7 @@
     - mariadb-server
     - mariadb-client
     - ruby-posix-mq
+    - ruby-mmap2
     - ruby-mysql2
     - ruby-rack
     - ruby-sinatra
@@ -24,7 +25,8 @@
     - sipwitchqt-server
     - sipwitchqt-utils
     system_services:
-    - sipwitchd
+    - sipwitchqt-server
+    - piwitch
   pre_tasks:
     - name: Test if debian system
       command: test -f /etc/debian_version
@@ -34,11 +36,10 @@
         name: "{{ update_packages }}"
         state: latest
     - name: Restart services
-      systemd: name="{{item}}" state=restarted 
+      systemd: name="{{item}}" state=restarted enabled=yes
       with_items:
       - "{{system_services}}"
   roles:
     - server-setup
-    - setup-utils       # needed for piwitch-bootstrap...
-    - setup-webkit      # web support
+    - setup-piwitch     # webkit, utils, etc...
     - install-db        # create db users, load from our schema

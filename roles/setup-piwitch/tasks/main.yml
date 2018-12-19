@@ -1,0 +1,22 @@
+---
+- name: Refresh webkit deployment 
+  copy:
+    src: "{{ item }}"
+    dest: "{{ rack_install_prefix }}/"
+  with_fileglob:
+    - webkit/*
+
+- name: Fix file permissions
+  file:
+    path: "{{ rack_install_prefix }}/piwitch"
+    mode: 0755
+
+- name: Refresh database utilities
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/sbin/"
+    owner: "root"
+    mode: 0755
+  with_fileglob:
+    - utils/*
+

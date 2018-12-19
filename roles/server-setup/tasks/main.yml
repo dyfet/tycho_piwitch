@@ -17,11 +17,6 @@
 
 # definately want services stopped/inactive before any updates processed
 
-- name: Stop services
-  systemd: name="{{item}}" state=stopped 
-  with_items:
-    - "{{system_services}}"
-
 - name: Config sipwitchqt server
   template:
     src: sipwitchqt.conf.j2
@@ -29,4 +24,15 @@
     mode: 0640
     owner: "{{ sip_server_identity }}"
     group: "{{ sip_server_identity }}"
+
+- name: Define piwitch systemd service
+  template:
+    src: piwitch.service.j2
+    dest: /lib/systemd/system/piwitch.service
+    mode: 0644
+
+- name: Stop services
+  systemd: name="{{item}}" state=stopped daemon_reload=true
+  with_items:
+    - "{{system_services}}"
 

@@ -7,12 +7,12 @@
 
 - name: Install signing key
   apt_key:
-    url: https://www.cherokeesofidaho.org/public/stretch/GPG_KEY
+    url: "{{ debian_repo }}/GPG_KEY"
     state: present
 
 - name: Install debian {{ debian_version }} repo tychosoft
   apt_repository:
-    repo: deb https://www.cherokeesofidaho.org/public/{{ debian_version}}/ ./
+    repo: deb {{ debian_repo }}/ {{ debian_path }}
     state: present
     filename: tychosoft-public
 

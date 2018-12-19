@@ -1,3 +1,9 @@
+v0.1.0
+* Debian repo relocatable, needed for local installs
+* Introduction of ruby webkit, initial skeleton code
+* System service management for rackup
+* Database permissions and fixes
+
 v0.0.4
 * Remove web server config entirely, use sinatra and rack on ruby
 
