@@ -3,7 +3,7 @@
 -- then add a similarly contained piwitch user for the server.
 
 CREATE USER IF NOT EXISTS 'sipwitch'@'localhost' IDENTIFIED VIA unix_socket;
-GRANT INSERT, SELECT, DELETE ON piwitch.* TO 'sipwitch'@'localhost';
+GRANT INSERT, SELECT, DELETE, UPDATE ON piwitch.* TO 'sipwitch'@'localhost';
 
 FLUSH PRIVILEGES;
 
