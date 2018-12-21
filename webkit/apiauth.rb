@@ -1,4 +1,5 @@
 require_relative 'webkit'
+require 'pp'
 
 # actually "X-API-AUTHORIZATION" header going into rack...
 API_AUTHORIZATION = 'HTTP_X_API_AUTHORIZATION'
@@ -9,31 +10,53 @@ class ApiAuth < Sinatra::Base
   set :dump_errors, false
 
   attr_reader :identity
+  attr_reader :endpoint
+  attr_reader :extension
 
   helpers Sinatra::JSON
-
-  def authorized?
-    return identity != nil
-  end
 
   # convenience verification functions we can put in route handlers
   def authorization_required
     halt 401, "Authorization required" if !authorized?
   end
 
-  def admin_access_required
+  def local_access_required
     authorization_required
-    db = Webkit.db
-    # TODO: test if authorizing identity is in admin table
+    halt 401, "Local access required" if @identity.include? '@'
+  end      
+
+  def admin_access_required
+    local_access_required
+    halt 401, "Admin access required" if !admin?
   end
 
+  # checks we have
+  def authorized?
+    @identity != nil
+  end
+
+  def admin?
+    db = Webkit.db
+    # TODO: test if authorizing identity is in admin table
+    false
+  end
+
+  # authorization logic in front of all routes...
   before do
     @identity = nil
-    return if env[API_AUTHORIZATION] == nil      # no auth header, so skip
-    if env[API_AUTHORIZATON] && env[API_AUTHORIZATION].split(':').length == 2
-      auth = env['HTTP_AUTHORIZATION'].split(':')
+    @endpoint = env['SERVER_NAME'] + ':' + env['SERVER_PORT']
+    @extension = 0
+    # if we use the base uri also for the web token comp, but this means
+    # paths are locked and user has to create multiple tokens...
+    # + ':' + env['REQUEST_PATH'][1..-1][/^.+?(?=\/|$)/]
+
+    # exit early if no auth header to process...
+    return if env[API_AUTHORIZATION] == nil 
+
+    if env[API_AUTHORIZATION].split(':').length == 2
+      @identity, signature = env['HTTP_AUTHORIZATION'].split(':')
     else
-      halt 401
+      halt 401, "Invalid authorization header"
     end
     data = request.path
     data = "#{data}?#{request.query_string}" if request.query_string.present?
@@ -43,6 +66,5 @@ class ApiAuth < Sinatra::Base
     end
     # TODO: verify auth id against request signed by the endpoint web token,
     # on success reset env with effective authorization actually used
-    @identity = auth[0]
   end
 end
