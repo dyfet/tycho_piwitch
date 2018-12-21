@@ -8,14 +8,12 @@ class ApiAuth < Sinatra::Base
   set :sessions, false
   set :dump_errors, false
 
+  attr_reader :identity
+
   helpers Sinatra::JSON
 
   def authorized?
-    return env[API_AUTHORIZATION] != nil
-  end
-
-  def authorized
-    return env[API_AUTHORIZATION]
+    return identity != nil
   end
 
   # convenience verification functions we can put in route handlers
@@ -30,8 +28,8 @@ class ApiAuth < Sinatra::Base
   end
 
   before do
-    p "AUTH"
-    return if !authorized?      # no auth header, so skip
+    @identity = nil
+    return if env[API_AUTHORIZATION] == nil      # no auth header, so skip
     if env[API_AUTHORIZATON] && env[API_AUTHORIZATION].split(':').length == 2
       auth = env['HTTP_AUTHORIZATION'].split(':')
     else
@@ -45,6 +43,6 @@ class ApiAuth < Sinatra::Base
     end
     # TODO: verify auth id against request signed by the endpoint web token,
     # on success reset env with effective authorization actually used
-    env[API_AUTHORIZATION] = auth[0]
+    @identity = auth[0]
   end
 end
