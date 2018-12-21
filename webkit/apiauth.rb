@@ -18,7 +18,19 @@ class ApiAuth < Sinatra::Base
     return env[API_AUTHORIZATION]
   end
 
+  # convenience verification functions we can put in route handlers
+  def authorization_required
+    halt 401, "Authorization required" if !authorized?
+  end
+
+  def admin_access_required
+    authorization_required
+    db = Webkit.db
+    # TODO: test if authorizing identity is in admin table
+  end
+
   before do
+    p "AUTH"
     return if !authorized?      # no auth header, so skip
     if env[API_AUTHORIZATON] && env[API_AUTHORIZATION].split(':').length == 2
       auth = env['HTTP_AUTHORIZATION'].split(':')
