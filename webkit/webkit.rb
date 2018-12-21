@@ -2,13 +2,7 @@
 
 # Some global constants and configs we choose to define, create database
 
-class Webkit < Sinatra::Base
-  set :logging, false
-  set :sessions, false
-  set :dump_errors, false
-
-  helpers Sinatra::JSON
-
+class Webkit
   if ENV['RACK_ENV'] == 'production'
     @@config = {:name => 'piwitch', :production => true, :file => '/etc/sipwitchqt.conf'}
   else

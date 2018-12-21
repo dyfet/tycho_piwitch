@@ -1,6 +1,6 @@
-require_relative 'webkit'
+require_relative 'apiauth'
 
-class Restful < Webkit
+class Restful < ApiAuth
   get '/' do
     json(
       :name => 'restful', 

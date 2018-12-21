@@ -1,6 +1,7 @@
-require_relative 'webkit'
+require_relative 'apiauth'
 
-class Actions < Webkit
+class Actions < ApiAuth
+  # endpoint generic id followed by post routes...
   get '/' do
     json(
       :name => 'actions', 
@@ -8,5 +9,6 @@ class Actions < Webkit
       :version => PROJECT_VERSION
     )
   end
+
 end
 
