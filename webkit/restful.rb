@@ -1,12 +1,6 @@
 require_relative 'webkit'
 
-class Restful < Sinatra::Base
-  set :logging, false
-  set :sessions, false
-  set :dump_errors, false
-
-  helpers Sinatra::JSON
-
+class Restful < Webkit
   get '/' do
     json(
       :name => 'restful', 

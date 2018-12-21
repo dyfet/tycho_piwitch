@@ -1,12 +1,6 @@
 require_relative 'webkit'
 
-class Actions < Sinatra::Base
-  set :logging, false
-  set :sessions, false
-  set :dump_errors, false
-
-  helpers Sinatra::JSON
-
+class Actions < Webkit
   get '/' do
     json(
       :name => 'actions', 
