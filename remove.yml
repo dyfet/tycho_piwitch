@@ -23,5 +23,3 @@
   roles:
     - remove-db
     - server-cleanup
-    
-

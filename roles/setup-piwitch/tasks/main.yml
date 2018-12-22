@@ -1,5 +1,5 @@
 ---
-- name: Refresh webkit deployment 
+- name: Refresh webkit deployment
   copy:
     src: "{{ item }}"
     dest: "{{ rack_install_prefix }}/"
@@ -19,4 +19,3 @@
     mode: 0755
   with_fileglob:
     - utils/*
-
