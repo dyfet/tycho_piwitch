@@ -14,9 +14,9 @@ version:
 	@echo $(VERSION)
 
 init:
-	@echo "PROJECT_VERSION = '${VERSION}'" >webkit/project.rb
-	@echo "PROJECT_NAME = '${PROJECT}'" >>webkit/project.rb
-	@echo "PROJECT_INVENTORY = '${INVENTORY}'" >>webkit/project.rb
+	@echo "PROJECT_VERSION = '${VERSION}'.freeze" >webkit/project.rb
+	@echo "PROJECT_NAME = '${PROJECT}'.feeze" >>webkit/project.rb
+	@echo "PROJECT_INVENTORY = '${INVENTORY}'.freeze" >>webkit/project.rb
 
 dist:
 	@rm -f $(PROJECT)-*.tar.gz
@@ -31,3 +31,8 @@ update:		init
 remove:
 	ansible-playbook -i inventory/$(INVENTORY).ini remove.yml
 
+lint:
+	rubocop
+
+sonar:	init
+	-@rubocop --format json --out rubocop.json

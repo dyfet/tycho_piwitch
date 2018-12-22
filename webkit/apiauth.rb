@@ -2,7 +2,7 @@ require_relative 'webkit'
 require 'pp'
 
 # actually "X-API-AUTHORIZATION" header going into rack...
-API_AUTHORIZATION = 'HTTP_X_API_AUTHORIZATION'
+API_AUTHORIZATION = 'HTTP_X_API_AUTHORIZATION'.freeze
 
 class ApiAuth < Sinatra::Base
   set :logging, false
@@ -36,7 +36,7 @@ class ApiAuth < Sinatra::Base
   end
 
   def admin?
-    db = Webkit.db
+    _db = Webkit.db
     # TODO: test if authorizing identity is in admin table
     false
   end
@@ -54,7 +54,7 @@ class ApiAuth < Sinatra::Base
     return if env[API_AUTHORIZATION].nil?
 
     if env[API_AUTHORIZATION].split(':').length == 2
-      @identity, signature = env['HTTP_AUTHORIZATION'].split(':')
+      @identity, _digest = env['HTTP_AUTHORIZATION'].split(':')
     else
       halt 401, 'Invalid authorization header'
     end

@@ -23,7 +23,7 @@ config = '/etc/sipwitchqt.conf'
 
 abort('*** piwitch-bootstrap: no config') unless File.exist?(config)
 File.open(config, 'r') do |infile; line, key, value|
-  while(line = infile.gets)
+  while (line = infile.gets)
     line.gsub!(/(^|\s)[#].*$/, '')
     case line.strip!
     when /^\[.*\]$/
@@ -68,7 +68,7 @@ IPL_COMMANDS = [
   "INSERT INTO Extensions(extnbr,authname) VALUES(#{extnbr},'#{user}');",
   "INSERT INTO Endpoints(extnbr) VALUES(#{extnbr});",
   "INSERT INTO Admin(authname,extnbr) VALUES('system',#{extnbr});",
-]
+].freeze
 
 IPL_COMMANDS.each do |sql|
   client.query(sql)

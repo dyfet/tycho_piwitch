@@ -38,7 +38,7 @@ class Webkit
   rescue Mysql2::Error => e
     abort("*** ipl-sipwitch: mysql error=#{e.errno},#{e.error}")
   end
-  
+
   def self.config
     @@config
   end
