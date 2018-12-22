@@ -4,14 +4,14 @@
 
 class Webkit
   if ENV['RACK_ENV'] == 'production'
-    @@config = {:name => 'piwitch', :production => true, :file => '/etc/sipwitchqt.conf'}
+    @@config = {name: 'piwitch', production: true, file: '/etc/sipwitchqt.conf'}
   else
-    @@config = {:name => 'sipwitch', :port => '3306', :username => ENV['USER'], :password => nil, :production => false, :file => '../devtest.conf'}
+    @@config = {name: 'sipwitch', port: '3306', username: ENV['USER'], password: nil, production: false, file: '../devtest.conf'}
   end
 
   File.open(@@config[:file], 'r') do |infile; section, line, key, value|
     section = nil
-    while(line = infile.gets)
+    while (line = infile.gets)
       line.gsub!(/(^|\s)[#].*$/, '')
       case line.strip!
       when /^\[.*\]$/
@@ -30,7 +30,7 @@ class Webkit
         end
       end
     end
-  end if File.exists?(@@config[:file])
+  end if File.exist?(@@config[:file])
   @@config[:database] = @@config[:name]
 
   begin
@@ -40,19 +40,18 @@ class Webkit
   end
   
   def self.config
-    return @@config
+    @@config
   end
 
   def self.realm
-    return @@config[:realm]
+    @@config[:realm]
   end
 
   def self.production?
-    return @@config[:production]
+    @@config[:production]
   end
 
   def self.db
-    return @@database
+    @@database
   end
 end
-

@@ -17,17 +17,17 @@ class ApiAuth < Sinatra::Base
 
   # convenience verification functions we can put in route handlers
   def authorization_required
-    halt 401, "Authorization required" if !authorized?
+    halt 401, 'Authorization required' unless authorized?
   end
 
   def local_access_required
     authorization_required
-    halt 401, "Local access required" if @identity.include? '@'
-  end      
+    halt 401, 'Local access required' if @identity.include? '@'
+  end
 
   def admin_access_required
     local_access_required
-    halt 401, "Admin access required" if !admin?
+    halt 401, 'Admin access required' unless admin?
   end
 
   # checks we have
@@ -51,12 +51,12 @@ class ApiAuth < Sinatra::Base
     # + ':' + env['REQUEST_PATH'][1..-1][/^.+?(?=\/|$)/]
 
     # exit early if no auth header to process...
-    return if env[API_AUTHORIZATION] == nil 
+    return if env[API_AUTHORIZATION].nil?
 
     if env[API_AUTHORIZATION].split(':').length == 2
       @identity, signature = env['HTTP_AUTHORIZATION'].split(':')
     else
-      halt 401, "Invalid authorization header"
+      halt 401, 'Invalid authorization header'
     end
     data = request.path
     data = "#{data}?#{request.query_string}" if request.query_string.present?

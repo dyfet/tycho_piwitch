@@ -5,7 +5,7 @@
 # unlimited permission to copy and/or distribute it, with or without
 # modifications, as long as this notice is preserved
 
-['pp', 'digest', 'fileutils', 'mysql2'].each {|mod| require mod}
+['digest', 'fileutils', 'mysql2'].each {|mod| require mod}
 
 def get_secret(type, user, domain, pass)
   case type
@@ -21,7 +21,7 @@ end
 bootstrap = {}
 config = '/etc/sipwitchqt.conf'
 
-abort("*** piwitch-bootstrap: no config") unless File.exists?(config)
+abort('*** piwitch-bootstrap: no config') unless File.exist?(config)
 File.open(config, 'r') do |infile; line, key, value|
   while(line = infile.gets)
     line.gsub!(/(^|\s)[#].*$/, '')
@@ -44,10 +44,10 @@ File.open(config, 'r') do |infile; line, key, value|
   end
 end
 
-dbcfg = {:database => 'piwitch', :username => 'root', :password => nil}
+dbcfg = {database: 'piwitch', username: 'root', password: nil}
 client = Mysql2::Client.new(dbcfg)
-results = client.query("SELECT dbseries FROM Config")
-print "already configured" if results.first
+results = client.query('SELECT dbseries FROM Config')
+print 'already configured' if results.first
 exit 0 if results.first
 
 extnbr = bootstrap[:extension]
@@ -73,4 +73,3 @@ IPL_COMMANDS = [
 IPL_COMMANDS.each do |sql|
   client.query(sql)
 end
-
