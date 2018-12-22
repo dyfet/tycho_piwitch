@@ -32,7 +32,11 @@ remove:
 	ansible-playbook -i inventory/$(INVENTORY).ini remove.yml
 
 lint:
-	rubocop
+	@rubocop
 
 sonar:	init
 	-@rubocop --format json --out rubocop.json
+
+clean:
+	@rm -f rubocop.json
+	@rm -f *.retry
