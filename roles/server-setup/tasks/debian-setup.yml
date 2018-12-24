@@ -16,3 +16,8 @@
     state: present
     filename: tychosoft-public
 
+- name: Update tychosoft repo
+  command: apt-get update -o Dir::Etc::sourcelist="sources.list.d/tychosoft-public.list" -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"
+  args:
+    warn: false
+  changed_when: 0

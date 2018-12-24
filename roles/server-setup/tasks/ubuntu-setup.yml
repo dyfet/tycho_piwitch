@@ -4,5 +4,8 @@
   apt_repository:
     repo: ppa:tychosoft/ppa
 
+- name: Update repo cache
+  apt:
+    update_cache: yes
 
 

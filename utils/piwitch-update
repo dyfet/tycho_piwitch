@@ -1,0 +1,6 @@
+#!/bin/sh
+if test -f /etc/apt/sources.list.d/tychosoft-public.list ; then
+	sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/tychosoft-public.list" -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"
+else
+	sudo apt-get update
+fi

@@ -6,10 +6,6 @@
 - include: ubuntu-setup.yml
   when: ansible_distribution == "Ubuntu"
 
-- name: Update repo cache
-  apt:
-    update_cache: yes
-
 - name: Install server packages
   apt:
     name: "{{ server_packages }}"
