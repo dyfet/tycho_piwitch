@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 PROJECT = piwitch
-VERSION = 0.1.0
+VERSION = 0.1.1
 INVENTORY = hosts
 
 .PHONY: all version dist install update remove
@@ -15,7 +15,7 @@ version:
 
 init:
 	@echo "PROJECT_VERSION = '${VERSION}'.freeze" >webkit/project.rb
-	@echo "PROJECT_NAME = '${PROJECT}'.feeze" >>webkit/project.rb
+	@echo "PROJECT_NAME = '${PROJECT}'.freeze" >>webkit/project.rb
 	@echo "PROJECT_INVENTORY = '${INVENTORY}'.freeze" >>webkit/project.rb
 
 dist:
@@ -37,6 +37,12 @@ lint:
 sonar:	init
 	-@rubocop --format json --out rubocop.json
 
+coverage:
+	@rm -f webkit/coverage
+	@./covertest
+
 clean:
 	@rm -f rubocop.json
 	@rm -f *.retry
+	@rm -rf webkit/coverage
+

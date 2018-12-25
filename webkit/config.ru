@@ -1,3 +1,15 @@
+case ENV['RACK_ENV']
+when /coverage/
+  require 'simplecov'
+  SimpleCov.start do
+    SimpleCov.command_name 'Unit Tests'
+  end
+when /development/
+when /production/
+else
+  abort("***: #{ENV['RACK_ENV']}: invalid configuration")
+end 
+
 require './actions.rb'
 require './restful.rb'
 

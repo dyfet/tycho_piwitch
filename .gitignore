@@ -10,7 +10,7 @@ group_vars/*.yml
 .idea/*
 !.idea/inspectionProfiles
 !.idea/inspectionProfiles/*
-venv/
+coverage/
 *.creator.user
 *.retry
 *.tar.gz

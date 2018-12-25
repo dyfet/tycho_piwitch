@@ -1,3 +1,8 @@
+v0.1.1
+* Bugfix for project constants
+* Start of code coverage support
+* Require rack environment type
+
 v0.1.0
 * Debian repo relocatable, needed for local installs
 * Introduction of ruby webkit, initial skeleton code
