@@ -3,4 +3,4 @@
 # test/development database connection options.
 
 cd webkit
-rackup --env development -o 0.0.0.0 -p 8020
+rackup --env development -o 0.0.0.0 -p 8022
