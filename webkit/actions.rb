@@ -1,8 +1,9 @@
 require_relative 'apiauth'
 
 class Actions < ApiAuth
-  # endpoint generic id followed by post routes...
+  # standard rpc action post handlers to be added...
+  METHODS = [].freeze
   get '/' do
-    json(name: 'actions', project: PROJECT_NAME, version: PROJECT_VERSION)
+    json(name: endpoint, project: PROJECT_NAME, version: PROJECT_VERSION, methods: METHODS)
   end
 end

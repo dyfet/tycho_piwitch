@@ -1,13 +1,28 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # You can create a local devtest.conf file based on sipwitchqt.conf for
 # test/development database connection options.
+
+pid=""
+status="0"
+
+function finish {
+	status=$?
+	if test ! -z "$pid" ; then
+		kill -2 $pid
+		wait $pid
+	fi
+	pid=""
+	echo "exiting $status"
+	exit $status
+}
+
+trap finish EXIT
 
 cd webkit
 rackup --env coverage -o localhost -p 8021 &
 pid=$!
 echo "running $pid"
 sleep 3
-kill -2 $pid
-echo "stopping"
-wait $pid
-echo "killed"
+set -e
+echo "test /actions..." ; curl -sf http://localhost:8021/actions >/dev/null
+echo "test /restful..." ; curl -sf http://localhost:8021/restful >/dev/null

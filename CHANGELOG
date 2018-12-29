@@ -1,3 +1,9 @@
+v0.1.2
+* Move devtest port to 8022 to avoid conflict with running server
+* Change to support deployment env setting
+* Remove port from auth token
+* Improved endpoint management
+
 v0.1.1
 * Bugfix for project constants
 * Start of code coverage support

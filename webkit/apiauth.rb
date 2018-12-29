@@ -44,14 +44,22 @@ class ApiAuth < Sinatra::Base
   # authorization logic in front of all routes...
   before do
     @identity = nil
-    @endpoint = env['SERVER_NAME'] + ':' + env['SERVER_PORT']
     @extension = 0
-    # if we use the base uri also for the web token comp, but this means
-    # paths are locked and user has to create multiple tokens...
-    # + ':' + env['REQUEST_PATH'][1..-1][/^.+?(?=\/|$)/]
-
+    @endpoint = (@env['HTTP_X_FORWARDED_HOST'] || @env['HTTP_HOST'] || @env['SERVER_NAME']).gsub(/:\d+\z/, '') + '/' + env['REQUEST_PATH'][1..-1][/^.+?(?=\/|$)/]
     # exit early if no auth header to process...
     return if env[API_AUTHORIZATION].nil?
+
+    # While in theory the endpoint can be faked, you already have to know
+    # the underlying secret stored for the user to compute a valid web token
+    # to seed the digest.  If you know the secret already you do not need
+    # bother faking the endpoint, and if you don't, it does not matter if
+    # you do.  Incidentally this also means that www.xxx.yyy and xxx.yyy do
+    # have different token values even if they map to the same server.
+
+    # Please also note that different endpoints, like restful and actions,
+    # may also have different tokens.  It is possible some api endpoints may be
+    # forwarded from a public website, while others, such as restful, are
+    # only accessed entirely private or locally.
 
     if env[API_AUTHORIZATION].split(':').length == 2
       @identity, _digest = env['HTTP_AUTHORIZATION'].split(':')
@@ -66,5 +74,10 @@ class ApiAuth < Sinatra::Base
     end
     # TODO: verify auth id against request signed by the endpoint web token,
     # on success reset env with effective authorization actually used
+  end
+
+  # any common api handlers, can be overridden
+  get '/' do
+    json(name: endpoint, project: PROJECT_NAME, version: PROJECT_VERSION)
   end
 end

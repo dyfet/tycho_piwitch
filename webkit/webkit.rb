@@ -3,7 +3,7 @@
 # Some global constants and configs we choose to define, create database
 
 class Webkit
-  if ENV['RACK_ENV'] == 'production'
+  if ENV['RACK_ENV'] == 'production' || ENV['RACK_ENV'] == 'deployment'
     @@config = {name: 'piwitch', production: true, file: '/etc/sipwitchqt.conf'}
   else
     @@config = {name: 'sipwitch', port: '3306', username: ENV['USER'], password: nil, production: false, file: '../devtest.conf'}
