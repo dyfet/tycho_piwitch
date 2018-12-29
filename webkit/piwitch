@@ -2,5 +2,5 @@
 if test -f /etc/default/piwitch ; then
 	. /etc/default/piwitch ; fi
 cd $(dirname "$0")
-rackup --env production -o ${BIND:-0.0.0.0} -p ${PORT:-8020}
-# >>logfiles/production.log 2>&1
+rackup --env deployment -o ${BIND:-0.0.0.0} -p ${PORT:-8020}
+# >>logfiles/deployment.log 2>&1

@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 PROJECT = piwitch
-VERSION = 0.1.1
+VERSION = 0.1.2
 INVENTORY = hosts
 
 .PHONY: all version dist install update remove
@@ -38,7 +38,7 @@ sonar:	init
 	-@rubocop --format json --out rubocop.json
 
 coverage:
-	@rm -f webkit/coverage
+	@rm -rf webkit/coverage
 	@./covertest
 
 clean:
