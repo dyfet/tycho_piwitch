@@ -1,3 +1,6 @@
+v0.2.1
+* Cleanup and simplification of inventory example.
+
 v0.2.0
 * Expanded templating and inventory based config support
 * Defaults for modern ansible and python3
