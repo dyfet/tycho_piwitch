@@ -15,7 +15,7 @@
 
 - name: Config sipwitchqt server
   template:
-    src: sipwitchqt.conf.j2
+    src: templates/sipwitchqt.conf.j2
     dest: /etc/sipwitchqt.conf
     mode: 0640
     owner: "{{ sip_server_identity }}"
@@ -23,7 +23,7 @@
 
 - name: Define piwitch systemd service
   template:
-    src: piwitch.service.j2
+    src: templates/piwitch.service.j2
     dest: /lib/systemd/system/piwitch.service
     mode: 0644
 

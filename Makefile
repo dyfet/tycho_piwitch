@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 PROJECT = piwitch
-VERSION = 0.1.2
+VERSION = 0.2.0
 INVENTORY = hosts
 
 .PHONY: all version dist install update remove
@@ -27,6 +27,9 @@ install:	init
 
 update:		init
 	ansible-playbook -i inventory/$(INVENTORY).ini install.yml
+
+config:
+	ansible-playbook -i inventory/$(INVENTORY).ini config.yml
 
 remove:
 	ansible-playbook -i inventory/$(INVENTORY).ini remove.yml

@@ -1,3 +1,10 @@
+v0.2.0
+* Expanded templating and inventory based config support
+* Defaults for modern ansible and python3
+* More complete server config thru ansible inventory vars
+* Relocate templates to make them easier to work with
+  - this means you can manage server configs remote from here
+
 v0.1.2
 * Move devtest port to 8022 to avoid conflict with running server
 * Change to support deployment env setting

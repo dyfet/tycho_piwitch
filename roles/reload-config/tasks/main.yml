@@ -1,0 +1,15 @@
+---
+
+- name: Config sipwitchqt server
+  template:
+    src: templates/sipwitchqt.conf.j2
+    dest: /etc/sipwitchqt.conf
+    mode: 0640
+    owner: "{{ sip_server_identity }}"
+    group: "{{ sip_server_identity }}"
+
+- name: Reload services
+  systemd: name="{{item}}" state=reloaded
+  with_items:
+    - "{{system_services}}"
+

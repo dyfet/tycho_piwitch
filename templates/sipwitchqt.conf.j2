@@ -1,14 +1,18 @@
-; initial banner, may be changed
+{% if sip_server_banner is defined and sip_server_banner is not none %}
+banner = {{ sip_server_banner }}
+{% else %}
 banner = Welcome to {{ ansible_hostname }}
-
-; operator room mode
-operators = public
+{% endif %}
 database = mysql
 realm = {{ ansible_nodename }}
+retain = {{ sip_message_retention }}
+operators = {{ sip_operators_policy }}
 
-; local name auto detection to be fixed in sipwitch 0.3.3
-; localnames = {{ ansible_fqdn }} {{ ansible_hostname }}.local
+{% if sip_server_names is defined and sip_server_names is not none %}
+; force override auto-detection of server response host names
+localnames = {{ sip_server_names }}
 
+{% endif %}
 [database]
 name = piwitch
 username = sipwitch
