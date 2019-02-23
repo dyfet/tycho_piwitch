@@ -21,6 +21,12 @@
     owner: "{{ sip_server_identity }}"
     group: "{{ sip_server_identity }}"
 
+- name: Config mariadb server
+  template:
+    src: templates/90-raspberrypi.cnf.j2
+    dest: /etc/mysql/mariadb.conf.d
+    mode: 0644
+
 - name: Define piwitch systemd service
   template:
     src: templates/piwitch.service.j2

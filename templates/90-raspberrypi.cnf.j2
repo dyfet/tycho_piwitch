@@ -1,0 +1,29 @@
+# Values tuned particularly for raspberry pi lighter memory
+# mariadb server configurations.
+
+[mysqld]
+key_buffer_size         = 8M
+max_allowed_packet      = 8M
+thread_stack            = 192K
+thread_cache_size       = 8
+myisam-recover         = BACKUP
+#max_connections        = 100
+#table_cache            = 64
+#thread_concurrency     = 10
+query_cache_limit       = 512K
+query_cache_size        = 8M
+expire_logs_days        = 10
+max_binlog_size         = 100M
+
+[mysqldump]
+quick
+quote-names
+max_allowed_packet      = 16M
+
+[mysql]
+#no-auto-rehash # faster start of mysql but no tab completition
+
+[isamchk]
+key_buffer_size         = 16M
+
+
