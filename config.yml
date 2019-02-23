@@ -1,0 +1,17 @@
+#!/usr/bin/env ansible-playbook
+---
+
+# This is used to create a new install or update an existing one
+# Runs ansible-playbook -i inventory/hosts.ini install.yml
+
+- hosts: server
+  become: yes
+  vars:
+    debian_version: stretch
+    system_services:
+    - sipwitchqt-server
+  pre_tasks:
+    - name: Test if piwitch installed
+      command: test -f /usr/sbin/piwitch-series
+  roles:
+    - reload-config

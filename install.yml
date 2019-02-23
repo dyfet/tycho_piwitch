@@ -21,7 +21,7 @@
     - ruby-sinatra
     - ruby-sinatra-contrib
     - ruby-json
-    - python-mysqldb    # required for ansible mysql support
+    - python3-mysqldb    # required for ansible mysql support
     - sipwitchqt-server
     - sipwitchqt-utils
     system_services:
