@@ -5,28 +5,28 @@
 # Runs ansible-playbook -i inventory/hosts.ini install.yml
 
 - hosts: server
-  become: yes
+  become: true
   vars:
     debian_version: stretch
     update_packages:
-    - sipwitchqt-server
-    - sipwitchqt-utils
+      - sipwitchqt-server
+      - sipwitchqt-utils
     server_packages:
-    - mariadb-server
-    - mariadb-client
-    - ruby-posix-mq
-    - ruby-mmap2
-    - ruby-mysql2
-    - ruby-rack
-    - ruby-sinatra
-    - ruby-sinatra-contrib
-    - ruby-json
-    - python3-mysqldb    # required for ansible mysql support
-    - sipwitchqt-server
-    - sipwitchqt-utils
+      - mariadb-server
+      - mariadb-client
+      - ruby-posix-mq
+      - ruby-mmap2
+      - ruby-mysql2
+      - ruby-rack
+      - ruby-sinatra
+      - ruby-sinatra-contrib
+      - ruby-json
+      - python3-mysqldb    # required for ansible mysql support
+      - sipwitchqt-server
+      - sipwitchqt-utils
     system_services:
-    - sipwitchqt-server
-    - piwitch
+      - sipwitchqt-server
+      - piwitch
   pre_tasks:
     - name: Test if debian system
       command: test -f /etc/debian_version
@@ -38,7 +38,7 @@
     - name: Restart services
       systemd: name="{{item}}" state=restarted enabled=yes
       with_items:
-      - "{{system_services}}"
+        - "{{system_services}}"
   roles:
     - server-setup
     - setup-piwitch     # webkit, utils, etc...

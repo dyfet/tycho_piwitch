@@ -5,11 +5,11 @@
 # Runs ansible-playbook -i inventory/hosts.ini install.yml
 
 - hosts: server
-  become: yes
+  become: true
   vars:
     debian_version: stretch
     system_services:
-    - sipwitchqt-server
+      - sipwitchqt-server
   pre_tasks:
     - name: Test if piwitch installed
       command: test -f /usr/sbin/piwitch-series

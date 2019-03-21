@@ -36,6 +36,7 @@ remove:
 
 lint:
 	@rubocop
+	@find . -name "*.yml" | xargs yamllint -s
 
 sonar:	init
 	-@rubocop --format json --out rubocop.json

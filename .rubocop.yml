@@ -1,3 +1,4 @@
+---
 # require class variable, singleton with global access methods
 Style/ClassVars:
     Exclude:
@@ -11,7 +12,7 @@ Metrics/LineLength:
 Metrics/BlockNesting:
     Max: 5
 
-# prefer word lists direct 
+# prefer word lists direct
 Style/WordArray:
     Enabled: false
 
