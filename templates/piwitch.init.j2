@@ -22,7 +22,7 @@ case "$1" in
 start)
 	echo -n "Starting $DESC: "
     start-stop-daemon --start --quiet \
-        --group sipwitch --user sipwitch --exec $DAEMON &>/dev/null
+        --group sipwitch --chuid sipwitch:sipwitch --exec $DAEMON &>/dev/null
     echo "$NAME."
     ;;
 stop)

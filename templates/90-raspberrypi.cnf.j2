@@ -15,6 +15,9 @@ query_cache_size        = 8M
 expire_logs_days        = 10
 max_binlog_size         = 100M
 
+# may no longer be default in future...
+plugin-load-add = auth_socket.so
+
 [mysqldump]
 quick
 quote-names
