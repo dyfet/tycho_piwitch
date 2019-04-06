@@ -21,7 +21,7 @@ PIDPATH=/tmp/piwitch.pid
 case "$1" in
 start)
 	echo -n "Starting $DESC: "
-    start-stop-daemon --start --quiet \
+    start-stop-daemon --start --quiet --background \
         --group sipwitch --chuid sipwitch:sipwitch --exec $DAEMON &>/dev/null
     echo "$NAME."
     ;;
