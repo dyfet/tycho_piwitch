@@ -1,3 +1,6 @@
+v0.3.0
+* Remove systemd requirements
+
 v0.2.2
 * MariaDB tuning for pi/smaller memory use cases
 

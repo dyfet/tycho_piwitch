@@ -9,7 +9,7 @@
     group: "{{ sip_server_identity }}"
 
 - name: Reload services
-  systemd: name="{{item}}" state=reloaded
+  service: name="{{item}}" state=reloaded
   with_items:
     - "{{system_services}}"
 
