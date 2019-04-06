@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 PROJECT = piwitch
-VERSION = 0.2.2
+VERSION = 0.3.0
 INVENTORY = hosts
 
 .PHONY: all version dist install update remove
@@ -36,6 +36,7 @@ remove:
 
 lint:
 	@rubocop
+	@ansible-lint *.yml
 	@find . -name "*.yml" | xargs yamllint -s
 
 sonar:	init

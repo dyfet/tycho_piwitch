@@ -17,9 +17,9 @@
     - name: Test if piwitch installed
       command: test -f /usr/sbin/piwitch-series
     - name: Stop services
-      systemd: name="{{item}}" state=stopped enabled=no
+      service: name="{{ item }}" state=stopped enabled=no
       with_items:
-        - "{{stopped_services}}"
+        - "{{ stopped_services }}"
   roles:
     - remove-db
     - server-cleanup

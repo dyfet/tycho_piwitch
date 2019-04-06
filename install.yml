@@ -36,9 +36,9 @@
         name: "{{ update_packages }}"
         state: latest
     - name: Restart services
-      systemd: name="{{item}}" state=restarted enabled=yes
+      service: name="{{ item }}" state=restarted enabled=yes
       with_items:
-        - "{{system_services}}"
+        - "{{ system_services }}"
   roles:
     - server-setup
     - setup-piwitch     # webkit, utils, etc...
