@@ -13,7 +13,6 @@ PATH=/usr/local/bin:/usr/local/sbin/:/sbin:/usr/sbin:/bin:/usr/bin
 DESC="piwitch rack web server"
 NAME=piwitch
 DAEMON={{rack_install_prefix}}/piwitch
-SCRIPTNAME=/etc/init.d/$NAME
 PIDPATH=/tmp/piwitch.pid
 
 . /lib/lsb/init-functions
@@ -43,12 +42,7 @@ restart|force-reload)
     $0 start
     ;;
 try-restart)
-    if test -f "$PIDFILE" ; then
-        $0 stop
-        $0 start
-    else
-        echo "Inactive $NAME"
-    fi
+    $0 status >/dev/null 2>&1 && $0 restart
     ;;
 *)
     echo "Usage: $0 {start|stop|restart|force-reload|try-restart|status}" >&2
