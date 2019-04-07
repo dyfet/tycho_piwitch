@@ -2,5 +2,5 @@
 if test -f /etc/default/piwitch ; then
 	. /etc/default/piwitch ; fi
 cd $(dirname "$0")
-exec -a $0 rackup --pid /tmp/piwitch.pid --env deployment -o ${BIND:-0.0.0.0} -p ${PORT:-8020}
+exec -a $0 rackup --pid /tmp/piwitch.pid --env deployment -o ${BIND:-0.0.0.0} -p ${PORT:-8020} $@
 # >>logfiles/deployment.log 2>&1
