@@ -20,25 +20,23 @@ PIDPATH=/tmp/piwitch.pid
 
 case "$1" in
 start)
-	echo -n "Starting $DESC: "
+	echo -n "Starting $NAME: "
     start-stop-daemon --start --quiet --background \
         --group sipwitch --chuid sipwitch:sipwitch --exec $DAEMON &>/dev/null
-    echo "$NAME."
+    echo "$?"
     ;;
 stop)
-    echo -n "Stopping $DESC: "
+    echo -n "Stopping $NAME: "
     [ -n "$PID" ] && start-stop-daemon --stop --quiet \
-        --retry=TERM/30/KILL/5 --pidfile $PID --remove-pidfile
-    echo "$NAME."
+        --retry=TERM/30/KILL/5 --pidfile $PIDPATH
+    echo "$?"
     ;;
 status)
-    if test -f "$PIDPATH" ; then
-        echo "$NAME running."
-        exit 0
-    else
-        echo "$NAME stopped."
-        exit 3
-    fi
+    echo -n "Status $NAME: "
+    start-stop-daemon --status --quiet --pidfile $PIDPATH
+    exit_code=$?
+    echo $exit_code
+    exit $exit_code
     ;;	
 restart|force-reload)
     $0 stop
@@ -49,7 +47,7 @@ try-restart)
         $0 stop
         $0 start
     else
-        echo "Inactive $DESC: $NAME."
+        echo "Inactive $NAME"
     fi
     ;;
 *)
