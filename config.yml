@@ -7,7 +7,7 @@
 - hosts: server
   become: true
   vars:
-    debian_version: stretch
+    debian_version: buster
     system_services:
       - sipwitchqt-server
   pre_tasks:

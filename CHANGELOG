@@ -1,3 +1,6 @@
+v0.3.2
+* Upgrade to beowulf/buster defaults
+
 v0.3.1
 * Use chuid in init
 

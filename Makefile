@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 PROJECT = piwitch
-VERSION = 0.3.1
+VERSION = 0.3.2
 INVENTORY = hosts
 
 .PHONY: all version dist install update remove
